@@ -1,9 +1,8 @@
 import atexit
 import logging
 import os
-import warnings
 from argparse import ArgumentParser
-from pathlib import Path
+from pathlib import Path, PosixPath
 from threading import Thread
 from time import sleep, time
 from typing import List, Optional
@@ -68,10 +67,10 @@ _WELCOME_MESSAGE = """
 |  https://docs.arize.com/phoenix
 |
 |  🚀 Phoenix Server 🚀
-|  Phoenix UI: http://{host}:{port}/{root_path}
+|  Phoenix UI: {ui_path}
 |  Log traces:
-|    - gRPC: http://{host}:{grpc_port}
-|    - HTTP: http://{host}:{port}/{root_path}/v1/traces
+|    - gRPC: {grpc_path}
+|    - HTTP: {http_path}
 |  Storage: {storage}
 """
 
@@ -124,7 +123,6 @@ if __name__ == "__main__":
     parser.add_argument("--no-internet", action="store_true")
     parser.add_argument("--umap_params", type=str, required=False, default=DEFAULT_UMAP_PARAMS_STR)
     parser.add_argument("--debug", action="store_false")
-    parser.add_argument("--enable-prometheus", type=bool, default=False)
     subparsers = parser.add_subparsers(dest="command", required=True)
     serve_parser = subparsers.add_parser("serve")
     datasets_parser = subparsers.add_parser("datasets")
@@ -226,15 +224,7 @@ if __name__ == "__main__":
     )
     read_only = args.read_only
     logger.info(f"Server umap params: {umap_params}")
-    if enable_prometheus := (get_env_enable_prometheus() or args.enable_prometheus):
-        if args.enable_prometheus:
-            warnings.warn(
-                "The --enable-prometheus command line argument is being deprecated "
-                "and will be removed in an upcoming release. "
-                "Please set the PHOENIX_ENABLE_PROMETHEUS environment variable to TRUE.",
-                DeprecationWarning,
-                stacklevel=2,
-            )
+    if enable_prometheus := get_env_enable_prometheus():
         from phoenix.server.prometheus import start_prometheus
 
         start_prometheus()
@@ -257,15 +247,15 @@ if __name__ == "__main__":
 
     # Print information about the server
     phoenix_version = pkg_resources.get_distribution("arize-phoenix").version
-    config = {
-        "version": phoenix_version,
-        "host": display_host,
-        "port": port,
-        "root_path": host_root_path.strip("/"),
-        "grpc_port": get_env_grpc_port(),
-        "storage": get_printable_db_url(db_connection_str),
-    }
-    print(_WELCOME_MESSAGE.format(**config))
+    print(
+        _WELCOME_MESSAGE.format(
+            version=phoenix_version,
+            ui_path=PosixPath(f"http://{host}:{port}", host_root_path),
+            grpc_path=f"http://{host}:{get_env_grpc_port()}",
+            http_path=PosixPath(f"http://{host}:{port}", host_root_path, "v1/traces"),
+            storage=get_printable_db_url(db_connection_str),
+        )
+    )
 
     # Start the server
     server.run()

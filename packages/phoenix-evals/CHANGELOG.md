@@ -1,5 +1,49 @@
 # Changelog
 
+## [0.13.1](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-evals-v0.13.0...arize-phoenix-evals-v0.13.1) (2024-06-30)
+
+
+### Bug Fixes
+
+* llm_classify from warning message ([#3752](https://github.com/Arize-ai/phoenix/issues/3752)) ([717a0c7](https://github.com/Arize-ai/phoenix/commit/717a0c786b1aa78000d6bc3e47f369bbba7662a3))
+
+## [0.13.0](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-evals-v0.12.0...arize-phoenix-evals-v0.13.0) (2024-06-26)
+
+
+### Features
+
+* added SQLEvaluator ([#3577](https://github.com/Arize-ai/phoenix/issues/3577)) ([0a79535](https://github.com/Arize-ai/phoenix/commit/0a79535f20426072c8ffa60960b605a8dbb95a18))
+
+
+### Bug Fixes
+
+* add support for querying datetimes ([#3439](https://github.com/Arize-ai/phoenix/issues/3439)) ([90fd619](https://github.com/Arize-ai/phoenix/commit/90fd61927d11a0eaf151ca41b81f149b9fc8214f))
+* resolves the authentication issue for GeminiModel in evals model ([#3662](https://github.com/Arize-ai/phoenix/issues/3662)) ([b79d946](https://github.com/Arize-ai/phoenix/commit/b79d946cebd7447bcda7edbdf23603a2ceef5f03))
+
+## [0.12.0](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-evals-v0.11.0...arize-phoenix-evals-v0.12.0) (2024-06-06)
+
+
+### Features
+
+* add span-level templates for evaluation hallucinations and qa correctness ([#3380](https://github.com/Arize-ai/phoenix/issues/3380)) ([1689b49](https://github.com/Arize-ai/phoenix/commit/1689b49cfa3ea99d39bd98873580e5253101a0c7))
+* Adds timing info to llm_classify ([#3377](https://github.com/Arize-ai/phoenix/issues/3377)) ([3e2785f](https://github.com/Arize-ai/phoenix/commit/3e2785f7d53dd628e7027fe988ae066fa1be0da1))
+
+## [0.11.0](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-evals-v0.10.0...arize-phoenix-evals-v0.11.0) (2024-05-31)
+
+
+### Features
+
+* Allow skipping on template mapping errors, returning debug info ([#3350](https://github.com/Arize-ai/phoenix/issues/3350)) ([dc18123](https://github.com/Arize-ai/phoenix/commit/dc1812379c33fbb89537c6aed6361f808f29ec73))
+* Serializable execution details ([#3358](https://github.com/Arize-ai/phoenix/issues/3358)) ([fc74513](https://github.com/Arize-ai/phoenix/commit/fc7451372c9b938a27c7b36f7e32704f7b3a8e87))
+
+## [0.10.0](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-evals-v0.9.2...arize-phoenix-evals-v0.10.0) (2024-05-29)
+
+
+### Features
+
+* docker image runs as root by default with tags for nonroot and debug images ([#3280](https://github.com/Arize-ai/phoenix/issues/3280)) ([41a4826](https://github.com/Arize-ai/phoenix/commit/41a4826733e104a3ec533a73049df5b778391e7f))
+* Support mistral ([#3270](https://github.com/Arize-ai/phoenix/issues/3270)) ([4e38531](https://github.com/Arize-ai/phoenix/commit/4e3853159881fa936d04beff5feb971df72ad038))
+
 ## [0.9.2](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-evals-v0.9.1...arize-phoenix-evals-v0.9.2) (2024-05-21)
 
 

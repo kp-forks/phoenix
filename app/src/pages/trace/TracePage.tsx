@@ -392,14 +392,14 @@ const attributesContextualHelp = (
         </Heading>
         <Content>
           <Text>
-            All attributes associated with the span. Attributes are key-value
-            pairs that represent metadata associated with a span. For a detailed
-            description of the attributes, consult the semantic conventions of
-            the OpenInference tracing specification.
+            Attributes are key-value pairs that represent metadata associated
+            with a span. For detailed descriptions of specific attributes,
+            consult the semantic conventions section of the OpenInference
+            tracing specification.
           </Text>
         </Content>
         <footer>
-          <ExternalLink href="https://arize-ai.github.io/open-inference-spec/trace/spec/semantic_conventions.html">
+          <ExternalLink href="https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md">
             Semantic Conventions
           </ExternalLink>
         </footer>
@@ -568,18 +568,18 @@ function LLMSpanInfo(props: { span: Span; spanAttributes: AttributeObject }) {
     if (llmAttributes == null) {
       return [];
     }
-    return (llmAttributes[LLMAttributePostfixes.input_messages]?.map(
-      (obj) => obj[SemanticAttributePrefixes.message]
-    ) || []) as AttributeMessage[];
+    return (llmAttributes[LLMAttributePostfixes.input_messages]
+      ?.map((obj) => obj[SemanticAttributePrefixes.message])
+      .filter(Boolean) || []) as AttributeMessage[];
   }, [llmAttributes]);
 
   const outputMessages = useMemo<AttributeMessage[]>(() => {
     if (llmAttributes == null) {
       return [];
     }
-    return (llmAttributes[LLMAttributePostfixes.output_messages]?.map(
-      (obj) => obj[SemanticAttributePrefixes.message]
-    ) || []) as AttributeMessage[];
+    return (llmAttributes[LLMAttributePostfixes.output_messages]
+      ?.map((obj) => obj[SemanticAttributePrefixes.message])
+      .filter(Boolean) || []) as AttributeMessage[];
   }, [llmAttributes]);
 
   const prompts = useMemo<string[]>(() => {
@@ -777,9 +777,9 @@ function RetrieverSpanInfo(props: {
     if (retrieverAttributes == null) {
       return [];
     }
-    return (retrieverAttributes[RetrievalAttributePostfixes.documents]?.map(
-      (obj) => obj[SemanticAttributePrefixes.document]
-    ) || []) as AttributeDocument[];
+    return (retrieverAttributes[RetrievalAttributePostfixes.documents]
+      ?.map((obj) => obj[SemanticAttributePrefixes.document])
+      .filter(Boolean) || []) as AttributeDocument[];
   }, [retrieverAttributes]);
 
   // Construct a map of document position to document evaluations
@@ -906,18 +906,17 @@ function RerankerSpanInfo(props: {
     if (rerankerAttributes == null) {
       return [];
     }
-    return (rerankerAttributes[RerankerAttributePostfixes.input_documents]?.map(
-      (obj) => obj[SemanticAttributePrefixes.document]
-    ) || []) as AttributeDocument[];
+    return (rerankerAttributes[RerankerAttributePostfixes.input_documents]
+      ?.map((obj) => obj[SemanticAttributePrefixes.document])
+      .filter(Boolean) || []) as AttributeDocument[];
   }, [rerankerAttributes]);
   const output_documents = useMemo<AttributeDocument[]>(() => {
     if (rerankerAttributes == null) {
       return [];
     }
-    return (rerankerAttributes[
-      RerankerAttributePostfixes.output_documents
-    ]?.map((obj) => obj[SemanticAttributePrefixes.document]) ||
-      []) as AttributeDocument[];
+    return (rerankerAttributes[RerankerAttributePostfixes.output_documents]
+      ?.map((obj) => obj[SemanticAttributePrefixes.document])
+      .filter(Boolean) || []) as AttributeDocument[];
   }, [rerankerAttributes]);
 
   const numInputDocuments = input_documents.length;
@@ -1005,9 +1004,9 @@ function EmbeddingSpanInfo(props: {
     if (embeddingAttributes == null) {
       return [];
     }
-    return (embeddingAttributes[EmbeddingAttributePostfixes.embeddings]?.map(
-      (obj) => obj[SemanticAttributePrefixes.embedding]
-    ) || []) as AttributeEmbeddingEmbedding[];
+    return (embeddingAttributes[EmbeddingAttributePostfixes.embeddings]
+      ?.map((obj) => obj[SemanticAttributePrefixes.embedding])
+      .filter(Boolean) || []) as AttributeEmbeddingEmbedding[];
   }, [embeddingAttributes]);
 
   const hasEmbeddings = embeddings.length > 0;
@@ -1058,64 +1057,105 @@ function EmbeddingSpanInfo(props: {
 }
 
 function ToolSpanInfo(props: { span: Span; spanAttributes: AttributeObject }) {
-  const { spanAttributes } = props;
+  const { span, spanAttributes } = props;
+  const { input, output } = span;
+  const hasInput = typeof input?.value === "string";
+  const hasOutput = typeof output?.value === "string";
+  const inputIsText = input?.mimeType === "text";
+  const outputIsText = output?.mimeType === "text";
   const toolAttributes = useMemo<AttributeTool>(
     () => spanAttributes[SemanticAttributePrefixes.tool] || {},
     [spanAttributes]
   );
   const hasToolAttributes = Object.keys(toolAttributes).length > 0;
-  if (!hasToolAttributes) {
-    return null;
-  }
   const toolName = toolAttributes[ToolAttributePostfixes.name];
   const toolDescription = toolAttributes[ToolAttributePostfixes.description];
   const toolParameters = toolAttributes[ToolAttributePostfixes.parameters];
+  if (!hasInput && !hasOutput && !hasToolAttributes) {
+    return null;
+  }
   return (
     <Flex direction="column" gap="size-200">
-      <Card
-        title={"Tool" + (typeof toolName === "string" ? `: ${toolName}` : "")}
-        {...defaultCardProps}
-      >
-        <Flex direction="column">
-          {toolDescription != null ? (
-            <View
-              paddingStart="size-200"
-              paddingEnd="size-200"
-              paddingTop="size-100"
-              paddingBottom="size-100"
-              borderBottomColor="dark"
-              borderBottomWidth="thin"
-              backgroundColor="light"
-            >
-              <Flex direction="column" alignItems="start" gap="size-50">
-                <Text color="text-700" fontStyle="italic">
-                  Description
-                </Text>
-                <Text>{toolDescription as string}</Text>
+      {hasInput ? (
+        <MarkdownDisplayProvider>
+          <Card
+            title="Input"
+            {...defaultCardProps}
+            extra={
+              <Flex direction="row" gap="size-100">
+                {inputIsText ? <ConnectedMarkdownModeRadioGroup /> : null}
+                <CopyToClipboardButton text={input.value} />
               </Flex>
-            </View>
-          ) : null}
-          {toolParameters != null ? (
-            <View
-              paddingStart="size-200"
-              paddingEnd="size-200"
-              paddingTop="size-100"
-              paddingBottom="size-100"
-              borderBottomColor="dark"
-              borderBottomWidth="thin"
-            >
-              <Flex direction="column" alignItems="start" width="100%">
-                <Text color="text-700" fontStyle="italic">
-                  Parameters
-                </Text>
-                <JSONBlock>
-                  {JSON.stringify(toolParameters) as string}
-                </JSONBlock>
+            }
+          >
+            <CodeBlock {...input} />
+          </Card>
+        </MarkdownDisplayProvider>
+      ) : null}
+      {hasOutput ? (
+        <MarkdownDisplayProvider>
+          <Card
+            title="Output"
+            {...defaultCardProps}
+            backgroundColor="green-100"
+            borderColor="green-700"
+            extra={
+              <Flex direction="row" gap="size-100">
+                {outputIsText ? <ConnectedMarkdownModeRadioGroup /> : null}
+                <CopyToClipboardButton text={output.value} />
               </Flex>
-            </View>
-          ) : null}
-        </Flex>
-      </Card>
+            }
+          >
+            <CodeBlock {...output} />
+          </Card>
+        </MarkdownDisplayProvider>
+      ) : null}
+      {hasToolAttributes ? (
+        <Card
+          title={"Tool" + (typeof toolName === "string" ? `: ${toolName}` : "")}
+          {...defaultCardProps}
+        >
+          <Flex direction="column">
+            {toolDescription != null ? (
+              <View
+                paddingStart="size-200"
+                paddingEnd="size-200"
+                paddingTop="size-100"
+                paddingBottom="size-100"
+                borderBottomColor="dark"
+                borderBottomWidth="thin"
+                backgroundColor="light"
+              >
+                <Flex direction="column" alignItems="start" gap="size-50">
+                  <Text color="text-700" fontStyle="italic">
+                    Description
+                  </Text>
+                  <Text>{toolDescription as string}</Text>
+                </Flex>
+              </View>
+            ) : null}
+            {toolParameters != null ? (
+              <View
+                paddingStart="size-200"
+                paddingEnd="size-200"
+                paddingTop="size-100"
+                paddingBottom="size-100"
+                borderBottomColor="dark"
+                borderBottomWidth="thin"
+              >
+                <Flex direction="column" alignItems="start" width="100%">
+                  <Text color="text-700" fontStyle="italic">
+                    Parameters
+                  </Text>
+                  <JSONBlock>
+                    {JSON.stringify(toolParameters) as string}
+                  </JSONBlock>
+                </Flex>
+              </View>
+            ) : null}
+          </Flex>
+        </Card>
+      ) : null}
     </Flex>
   );
 }
@@ -1260,9 +1300,9 @@ function DocumentItem({
 function LLMMessage({ message }: { message: AttributeMessage }) {
   const messageContent = message[MessageAttributePostfixes.content];
   const toolCalls =
-    message[MessageAttributePostfixes.tool_calls]?.map(
-      (obj) => obj[SemanticAttributePrefixes.tool_call]
-    ) || [];
+    message[MessageAttributePostfixes.tool_calls]
+      ?.map((obj) => obj[SemanticAttributePrefixes.tool_call])
+      .filter(Boolean) || [];
   const hasFunctionCall =
     message[MessageAttributePostfixes.function_call_arguments_json] &&
     message[MessageAttributePostfixes.function_call_name];
@@ -1270,8 +1310,8 @@ function LLMMessage({ message }: { message: AttributeMessage }) {
   const messageStyles = useMemo<ViewStyleProps>(() => {
     if (role === "user") {
       return {
-        backgroundColor: "gray-600",
-        borderColor: "gray-100",
+        backgroundColor: "grey-100",
+        borderColor: "grey-700",
       };
     } else if (role === "assistant") {
       return {
@@ -1290,8 +1330,8 @@ function LLMMessage({ message }: { message: AttributeMessage }) {
       };
     }
     return {
-      backgroundColor: "gray-600",
-      borderColor: "gray-400",
+      backgroundColor: "grey-100",
+      borderColor: "grey-700",
     };
   }, [role]);
 

@@ -26,6 +26,7 @@ from .evaluators import (
     LLMEvaluator,
     QAEvaluator,
     RelevanceEvaluator,
+    SQLEvaluator,
     SummarizationEvaluator,
     ToxicityEvaluator,
 )
@@ -40,6 +41,10 @@ from .models import (
     VertexAIModel,
 )
 from .retrievals import compute_precisions_at_k
+from .span_templates import (
+    HALLUCINATION_SPAN_PROMPT_TEMPLATE,
+    QA_SPAN_PROMPT_TEMPLATE,
+)
 from .templates import (
     ClassificationTemplate,
     PromptTemplate,
@@ -86,6 +91,9 @@ __all__ = [
     "HallucinationEvaluator",
     "QAEvaluator",
     "RelevanceEvaluator",
+    "SQLEvaluator",
     "SummarizationEvaluator",
     "ToxicityEvaluator",
+    "HALLUCINATION_SPAN_PROMPT_TEMPLATE",
+    "QA_SPAN_PROMPT_TEMPLATE",
 ]

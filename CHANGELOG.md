@@ -1,5 +1,115 @@
 # Changelog
 
+## [4.5.0](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.4.3...arize-phoenix-v4.5.0) (2024-06-21)
+
+
+### Features
+
+* added SQLEvaluator ([#3577](https://github.com/Arize-ai/phoenix/issues/3577)) ([0a79535](https://github.com/Arize-ai/phoenix/commit/0a79535f20426072c8ffa60960b605a8dbb95a18))
+
+## [4.4.3](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.4.2...arize-phoenix-v4.4.3) (2024-06-17)
+
+
+### Bug Fixes
+
+* hdbscan incompatibility with numpy 2.0 ([#3533](https://github.com/Arize-ai/phoenix/issues/3533)) ([52dc11d](https://github.com/Arize-ai/phoenix/commit/52dc11d0b30e0a3588467de46ccfa02bd21e767b))
+
+## [4.4.2](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.4.1...arize-phoenix-v4.4.2) (2024-06-13)
+
+
+### Bug Fixes
+
+* ui light mode fix for llm messages ([#3510](https://github.com/Arize-ai/phoenix/issues/3510)) ([9aa2eba](https://github.com/Arize-ai/phoenix/commit/9aa2ebab31a8fd729c870e89fbc6b855e1eb6fda))
+
+## [4.4.1](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.4.0...arize-phoenix-v4.4.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* ensure welcome message urls are valid ([#3458](https://github.com/Arize-ai/phoenix/issues/3458)) ([3218e33](https://github.com/Arize-ai/phoenix/commit/3218e33d7d87ae6e06bd7573b3e2c5312531f256))
+
+## [4.4.0](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.3.1...arize-phoenix-v4.4.0) (2024-06-10)
+
+
+### Features
+
+* **ui:** add filter snippets for metadata and substring search ([#3451](https://github.com/Arize-ai/phoenix/issues/3451)) ([2c37be4](https://github.com/Arize-ai/phoenix/commit/2c37be41c4cc20fdf6d3d2c3e66e64d146307cc9))
+
+## [4.3.1](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.3.0...arize-phoenix-v4.3.1) (2024-06-10)
+
+
+### Bug Fixes
+
+* add support for querying datetimes ([#3441](https://github.com/Arize-ai/phoenix/issues/3441)) ([2f329a1](https://github.com/Arize-ai/phoenix/commit/2f329a1415009301aa9ea10de947acd435756646))
+
+## [4.3.0](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.2.4...arize-phoenix-v4.3.0) (2024-06-07)
+
+
+### Features
+
+* Adds timing info to llm_classify ([#3377](https://github.com/Arize-ai/phoenix/issues/3377)) ([3e2785f](https://github.com/Arize-ai/phoenix/commit/3e2785f7d53dd628e7027fe988ae066fa1be0da1))
+* Serializable execution details ([#3358](https://github.com/Arize-ai/phoenix/issues/3358)) ([fc74513](https://github.com/Arize-ai/phoenix/commit/fc7451372c9b938a27c7b36f7e32704f7b3a8e87))
+* **ui:** display input and output for tool spans (if available) ([#3396](https://github.com/Arize-ai/phoenix/issues/3396)) ([73312dc](https://github.com/Arize-ai/phoenix/commit/73312dc9f85aefba7f9d0c5105f0efd75327f0c1))
+
+
+### Bug Fixes
+
+* add separate package installations to notebooks ([#3393](https://github.com/Arize-ai/phoenix/issues/3393)) ([914e3fe](https://github.com/Arize-ai/phoenix/commit/914e3feceaf08d3f208669dfb5697feb4f51ac3a))
+* filter out undefined ([#3383](https://github.com/Arize-ai/phoenix/issues/3383)) ([e3a2d31](https://github.com/Arize-ai/phoenix/commit/e3a2d316956df40a6b7634427175dc20284e20ef))
+* percentage sign for alembic configparser ([#3403](https://github.com/Arize-ai/phoenix/issues/3403)) ([87bcd59](https://github.com/Arize-ai/phoenix/commit/87bcd5951f1a9ed98c415c40f4f83560610f56f2))
+
+
+### Documentation
+
+* minimum working example with a local llm ([#3348](https://github.com/Arize-ai/phoenix/issues/3348)) ([e4c657c](https://github.com/Arize-ai/phoenix/commit/e4c657cce7e5492e314dfdd7cc6cca54da68b7f6))
+
+## [4.2.4](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.2.3...arize-phoenix-v4.2.4) (2024-05-28)
+
+
+### Bug Fixes
+
+* update link to openinference spec ([#3322](https://github.com/Arize-ai/phoenix/issues/3322)) ([61dedf8](https://github.com/Arize-ai/phoenix/commit/61dedf8828f7a9aea1ee3b31790bb03e13207285))
+
+
+### Documentation
+
+* Update langchain dependencies in tutorials ([#3316](https://github.com/Arize-ai/phoenix/issues/3316)) ([e403652](https://github.com/Arize-ai/phoenix/commit/e4036528248369fe822c8cee836b68b1bc252d3d))
+
+## [4.2.3](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.2.2...arize-phoenix-v4.2.3) (2024-05-23)
+
+
+### Bug Fixes
+
+* adjust docker tags ([#3297](https://github.com/Arize-ai/phoenix/issues/3297)) ([f097acc](https://github.com/Arize-ai/phoenix/commit/f097accc603fd78478f68cb2c9a4a0830da3cce0))
+
+## [4.2.2](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.2.1...arize-phoenix-v4.2.2) (2024-05-23)
+
+
+### Bug Fixes
+
+* Tweak release flow ([#3295](https://github.com/Arize-ai/phoenix/issues/3295)) ([8ff19d3](https://github.com/Arize-ai/phoenix/commit/8ff19d347f3bc17628836ffd16ff7e33d734f024))
+
+## [4.2.1](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.2.0...arize-phoenix-v4.2.1) (2024-05-23)
+
+
+### Bug Fixes
+
+* **gql:** don't clear data if `read_only` ([#3291](https://github.com/Arize-ai/phoenix/issues/3291)) ([dbc3203](https://github.com/Arize-ai/phoenix/commit/dbc32035903a84b85fe3c97df80b8f4d4a3197db))
+
+## [4.2.0](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.1.3...arize-phoenix-v4.2.0) (2024-05-23)
+
+
+### Features
+
+* docker image runs as root by default with tags for nonroot and debug images ([#3282](https://github.com/Arize-ai/phoenix/issues/3282)) ([7178c25](https://github.com/Arize-ai/phoenix/commit/7178c25676447a5d83c2e4300584c8ba89da576d))
+
+## [4.1.3](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.1.2...arize-phoenix-v4.1.3) (2024-05-22)
+
+
+### Bug Fixes
+
+* need to check ".get()" because attribute may not be a dict ([#3267](https://github.com/Arize-ai/phoenix/issues/3267)) ([3917fcc](https://github.com/Arize-ai/phoenix/commit/3917fccbb4550db2fcdb23f288b42a2284dff59f))
+
 ## [4.1.2](https://github.com/Arize-ai/phoenix/compare/arize-phoenix-v4.1.1...arize-phoenix-v4.1.2) (2024-05-20)
 
 

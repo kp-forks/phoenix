@@ -11,6 +11,7 @@
   * [Persistence](deployment/persistence.md)
   * [Kubernetes](deployment/kubernetes.md)
   * [Docker](deployment/docker.md)
+  * [FAQs: Deployment](deployment/faqs-deployment.md)
 
 ## 🔭 Tracing
 
@@ -22,6 +23,7 @@
 * [How-to: Tracing](tracing/how-to-tracing/README.md)
   * [Tracing Core Concepts](tracing/how-to-tracing/tracing-core-concepts.md)
   * [Customize Traces](tracing/how-to-tracing/customize-traces.md)
+  * [Customize Spans](tracing/how-to-tracing/customize-spans.md)
   * [Auto Instrumentation](tracing/how-to-tracing/instrumentation/README.md)
     * [Auto Instrument: Python](tracing/how-to-tracing/instrumentation/auto-instrument-python/README.md)
       * [LlamaIndex](tracing/how-to-tracing/instrumentation/auto-instrument-python/llamaindex.md)
@@ -44,6 +46,7 @@
 * [Use Cases: Tracing](tracing/use-cases-tracing/README.md)
   * [Evaluate RAG](use-cases/rag-evaluation.md)
   * [Structured Data Extraction](tracing/use-cases-tracing/structured-extraction.md)
+* [FAQs: Tracing](tracing/faqs-tracing.md)
 
 ## 🧠 Evaluation
 
@@ -70,6 +73,21 @@
   * [Online Evals](evaluation/how-to-evals/online-evals.md)
 * [Evaluation Models](evaluation/evaluation-models.md)
 
+## 🗄️ Datasets & Experiments
+
+* [Overview: Datasets](datasets-and-experiments/overview-datasets.md)
+* [Quickstart: Datasets](datasets-and-experiments/quickstart-datasets.md)
+* [Concepts: Datasets](datasets-and-experiments/concepts-datasets.md)
+* [How-to: Datasets](datasets-and-experiments/how-to-datasets/README.md)
+  * [Creating Datasets](datasets-and-experiments/how-to-datasets/creating-datasets.md)
+  * [Exporting Datasets](datasets-and-experiments/how-to-datasets/exporting-datasets.md)
+  * [Run Experiments](datasets-and-experiments/how-to-datasets/run-experiments.md)
+  * [Using Evaluators](datasets-and-experiments/how-to-datasets/using-evaluators.md)
+* [Use Cases: Datasets](datasets-and-experiments/use-cases-datasets/README.md)
+  * [Text2SQL](datasets-and-experiments/use-cases-datasets/text2sql.md)
+  * [Summarization](datasets-and-experiments/use-cases-datasets/summarization.md)
+  * [Email Extraction](datasets-and-experiments/use-cases-datasets/email-extraction.md)
+
 ## 🔎 Retrieval
 
 * [Overview: Retrieval](retrieval/overview-retrieval.md)
@@ -92,15 +110,15 @@
   * [Manage the App](how-to/manage-the-app.md)
 * [Concepts: Inferences](inferences/inferences.md)
 * [How to: Inferences](inferences/how-to-inferences-1/README.md)
-  * [Use Example Inferences](inferences/how-to-inferences-1/use-example-datasets.md)
+  * [Use Example Inferences](inferences/how-to-inferences-1/use-example-inferences.md)
 * [Use-Cases: Inferences](inferences/use-cases-inferences/README.md)
   * [Embeddings Analysis](inferences/use-cases-inferences/embeddings-analysis.md)
 
 ## ⌨️ API
 
-* [Inferences and Schema](api/dataset-and-schema.md)
+* [Inferences and Schema](api/inference-and-schema.md)
 * [Session](api/session.md)
-* [Client & Get Spans](api/client.md)
+* [Client](api/client.md)
 * [Evals](api/evals.md)
 * [Models](api/evaluation-models.md)
 
